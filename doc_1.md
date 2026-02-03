@@ -9,7 +9,7 @@ The stack is implemented using:
     int top = -1;
 Here, 
 stack[MAX]= A character array used to store the opening bracket/parentheses
-top= An integer value that keeps track of the top ekement of the stack
+top= An integer value that keeps track of the top element of the stack
 
 The stack follows the LIFO(Last In First Out) principle:
 >>Opening brackets are pushed into the stack.
