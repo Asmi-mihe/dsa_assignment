@@ -1,12 +1,12 @@
 # Documentation for Program 2: Conversion of Infix Expression to Postfix and Evaluation
-The program converts an infix expression to postfix and evaluates it using a 'stack'. A stack to store operators during conversion based on precedence rules. For evaluation, the stack is used to store operands, perform operations, and push results back. The stack operations are managed using a top variable with a fixed maximum size.
+This program converts an infix expression to postfix and evaluates it using a 'stack'. A stack is used to store operators during conversion based on precedence rules. For evaluation, the stack is used to store operands, perform operations, and then push the results back. 
 
 ## (a) Explanation of how the data structures are defined
-In this program, the stack data structure is used for two purposes:
+In this program, the stack data structure is used mainly for two purposes:
 1. Converting the infix expression to postfix.
 2. Evaluating the postfix expression.
 
-1) Opeartor Stack
+1) Operator Stack
 char stack[MAX];
 int top = -1;
 Here, 
@@ -31,7 +31,7 @@ Function:
 Purpose: 
     Pushes an element onto the operator stack.
 Working:
-It scans an element at the top of the stack and increases/increments the 'top'
+It scans an element at the top of the stack and increases/increments the 'top'.
 
 2) pop()
 Function:
@@ -60,15 +60,15 @@ Function:
 Purpose:
     Converts an infix expression into a postfix expression.
 Working:
-    1. First it scans the infix expression character by character.
-    2. If it finds operand, then add directly to postfix.
-    3. If '(' is found then push to stack.
-    4. If ')' is found then pop from stack until '(' is found.
+    1. First, it scans the infix expression character by character.
+    2. If it finds operand, then adds directly to postfix.
+    3. If '(' is found then pushed to stack.
+    4. If ')' is found then poped from stack until '(' is found.
     5. If operator then
     >>Operators are popped from stack having higher or equal precedence.
-    >>Then push the current operator.
-    6. After scanning the complete expression, pop the remaining operators.
-    7. Added null character at the end of postfix string.
+    >>Then the current operator is pushed.
+    6. After scanning the complete expression, the remaining operators are popped.
+    7. Finally, null character are added at the end of postfix string.
 
 5) evaluatePostfix(char postfix[])
 Function:
@@ -76,9 +76,9 @@ Function:
 Purpose:
     Evaluates the postfix expression and returns the final result.
 Working:
-    1. First it scans the postfix expression from left to right.
-    2. If operand then Push onto value stack.
-    3. If operator then pop two values, perform operation, and push result back to stack.
+    1. First, it scans the postfix expression from left to right.
+    2. If its an operand then its pushed onto value stack.
+    Else if its an operator then the two values are pop, performed operation, and result is pushed back to stack.
     4. The final value remaining in stack is the result.
 
 ## (c) Overview of the main() Function
@@ -107,4 +107,4 @@ Output:
     Evaluated Result: 21
 
 ## (e) Conclusion
-This program demonstrates how a stack can be used to convert infix expressions to postfix form and evaluate them efficiently. It correctly handles operator precedence and parentheses, producing accurate postfix expressions and evaluated results for a variety of mathematical expressions.
+This program demonstrates how a stack can be used to convert infix expressions to postfix form and evaluate them. It logically handles operator precedence and parentheses while producing accurate postfix expressions and evaluated results for the entered mathematical expression.
