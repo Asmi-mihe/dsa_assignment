@@ -1,4 +1,4 @@
-# Documentation for Program 5: Building Min and Max Heaps from an Unsorted Array
+# Documentation for Program 6: Building Min and Max Heaps from an Unsorted Array
 This program takes an unsorted array of integers and builds both a Min Heap and a Max Heap. Min Heap is a heap structure where each parent node is smaller than its children and max heap is a heap structure where each parent node is larger than its children.
 This program demonstrates how to maintain heap properties using MinHeap and MaxHeap functions and builds the heaps from a sample array.
 
