@@ -5,14 +5,14 @@ This program demonstrates insertion and deletion operations in a doubly linked l
 In this program, a doubly linked list is used to store integer values, with each node containing pointers to both the previous and next nodes, allowing insertion, deletion, and traversal in both directions. 
 
 ### 1) Doubly Linked List Node Structure
-    ```c
+```c
     struct Node 
     {
     int data;
     struct Node* prev;
     struct Node* next;
     };
-    ```
+```
 Here, 
 
 data= stores the integer value of the node
