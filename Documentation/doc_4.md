@@ -5,12 +5,14 @@ This program demonstrates insertion and deletion operations in a doubly linked l
 In this program, a doubly linked list is used to store integer values, with each node containing pointers to both the previous and next nodes, allowing insertion, deletion, and traversal in both directions. 
 
 1) Doubly Linked List Node Structure
+    ```c
     struct Node 
     {
     int data;
     struct Node* prev;
     struct Node* next;
     };
+    ```
 Here, 
 data= stores the integer value of the node
 prev= pointer to the previous node in the list
@@ -20,6 +22,7 @@ next= pointer to the next node in the list
 
 1) CreateNode(int data)
 Function: 
+    ```c
     struct Node* CreateNode(int data) 
     {
         struct Node* NewNode = (struct Node*)malloc(sizeof(struct Node));
@@ -28,6 +31,7 @@ Function:
         NewNode->next = NULL;
         return NewNode;
     }
+    ```
 Purpose:
     Creates a new linked list node with the given data and returns its pointer.
 Working:
