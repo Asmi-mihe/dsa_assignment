@@ -3,26 +3,37 @@ This program generates **N random integers** in the range **[1, 1000]**, where N
 The program sorts the numbers using the selected method, displays the array before and after sorting, and shows the total number of comparisons and swaps performed.
 
 ## (a) Explanation of how the data structures are defined
-1) Array
+### 1) Array
+```c
     int arr[n];
-Here,
-arr[n] = A one-dimensional integer array used to store N randomly generated numbers.
+```
+Here,   
 
-2) Global Counters
+arr[n] = A one-dimensional integer array used to store N randomly generated numbers.      
+
+### 2) Global Counters
+```c
     int comparisons;
     int swaps;
-Here,
-comparisons = Counts how many comparisons are made during sorting.
-swaps = Counts how many swaps or movements are performed (if applicable).
+```
+Here,       
 
-3) Temporary Array (for Merge Sort)
+comparisons = Counts how many comparisons are made during sorting.            
+swaps = Counts how many swaps or movements are performed (if applicable).         
+
+### 3) Temporary Array (for Merge Sort)
+```c
     int temp[1000];
-Here,
-temp[] = A temporary array used during the merging process in Merge Sort.
+```
+Here,  
+
+temp[] = A temporary array used during the merging process in Merge Sort.         
 
 ## (b) Description of the Functions Implemented and its purpose
-1) printArray(int arr[], int n)
+
+### 1) printArray(int arr[], int n)
 Function:
+```c
     void printArray(int arr[], int n)
     {
     for(int i = 0; i < n; i++)
@@ -31,13 +42,16 @@ Function:
     }
     printf("\n");
     }
-Purpose:
-    Displays the elements of the array.
-Working:
-    It traverses the array from index 0 to n-1 and prints each element and it is also used to display both the original and sorted arrays.
+```
+Purpose:               
+    Displays the elements of the array.                
+    
+Working:                               
+    It traverses the array from index 0 to n-1 and prints each element and it is also used to display both the original and sorted arrays.           
 
-2) swap(int *a, int *b)
+### 2) swap(int *a, int *b)
 Function:
+```c
     void swap(int *a, int *b)
     {
     int temp = *a;
@@ -45,61 +59,154 @@ Function:
     *b = temp;
     swaps++;
     }
-Purpose:
-    Exchanges two elements in the array.
-Working:
-    It stores one value in a temporary variable, assigns the second value to the first, and then assigns the temporary value to the second.
-    Each time swap is called, the swap counter increases.
-
-3) bubbleSort(int arr[], int n)
-Purpose:
-    Sorts the array using Bubble Sort.
-Working:
-    It repeatedly compares adjacent elements and swaps them if they are in the wrong order.     After each pass, the largest unsorted element moves to its correct position.
-    Comparisons and swaps are counted during the process.
-
-4) selectionSort(int arr[], int n)
-Purpose:
-    Sorts the array using Selection Sort.
-Working:
-    It selects the smallest element from the unsorted portion of the array and swaps it with the first unsorted element.
-    This process continues until the entire array is sorted. Comparisons are counted in the inner loop and swaps are counted when exchange occurs.
+```
+Purpose:               
+    Exchanges two elements in the array.           
     
-5) insertionSort(int arr[], int n)
-Purpose:
-    Sorts the array using Insertion Sort.
-Working:
-    It takes one element at a time and inserts it into its correct position in the sorted part of the array. Elements are shifted to make space for insertion.  Comparisons and movements are counted.
+Working:            
+    It stores one value in a temporary variable, assigns the second value to the first, and then assigns the temporary value to the second.               
+    Each time swap is called, the swap counter increases.           
 
-6) mergeSort(int arr[], int l, int r)
-Purpose:
-    Sorts the array using Merge Sort.
-Working:
+### 3) bubbleSort(int arr[], int n)
+Function: 
+```c
+    void bubbleSort(int arr[], int n)
+    {
+        for(int i = 0; i < n - 1; i++)
+        {
+            for(int j = 0; j < n - i - 1; j++)
+            {
+                comparisons++;
+                if(arr[j] > arr[j + 1])
+                {
+                    swap(&arr[j], &arr[j + 1]);
+                }
+            }
+        }
+    }
+```
+Purpose:        
+    Sorts the array using Bubble Sort.         
+    
+Working:               
+    It repeatedly compares adjacent elements and swaps them if they are in the wrong order.     After each pass, the largest unsorted element moves to its correct position.        
+    Comparisons and swaps are counted during the process.           
+
+### 4) selectionSort(int arr[], int n)
+Function:
+```c
+    void selectionSort(int arr[], int n)
+    {
+        for(int i = 0; i < n - 1; i++)
+        {
+            int min = i;
+    
+            for(int j = i + 1; j < n; j++)
+            {
+                comparisons++;
+                if(arr[j] < arr[min])
+                {
+                    min = j;
+                }
+            }
+    
+            if(min != i)
+            {
+                swap(&arr[i], &arr[min]);
+            }
+        }
+    }
+```
+Purpose:     
+    Sorts the array using Selection Sort.        
+    
+Working:        
+    It selects the smallest element from the unsorted portion of the array and swaps it with the first unsorted element.           
+    This process continues until the entire array is sorted. Comparisons are counted in the inner loop and swaps are counted when exchange occurs.           
+    
+### 5) insertionSort(int arr[], int n)
+Function:
+```c
+    void insertionSort(int arr[], int n)
+    {
+        for(int i = 1; i < n; i++)
+        {
+            int key = arr[i];
+            int j = i - 1;
+    
+            while(j >= 0 && arr[j] > key)
+            {
+                comparisons++;
+                arr[j + 1] = arr[j];
+                swaps++;
+                j--;
+            }
+            if(j >= 0)
+            {
+                comparisons++;
+            }
+            arr[j + 1] = key;
+        }
+    }
+```
+Purpose:         
+    Sorts the array using Insertion Sort.      
+    
+Working:        
+    It takes one element at a time and inserts it into its correct position in the sorted part of the array. Elements are shifted to make space for insertion.  Comparisons and movements are counted.            
+
+### 6) mergeSort(int arr[], int l, int r)
+Function:
+```c
+    void mergeSort(int arr[], int l, int r)
+    {
+        if(l < r)
+        {
+            int m = (l + r) / 2;
+    
+            mergeSort(arr, l, m);
+            mergeSort(arr, m + 1, r);
+            merge(arr, l, m, r);
+        }
+    }
+```
+Purpose:         
+    Sorts the array using Merge Sort.          
+    
+Working:             
     It divides the array into two halves recursively until each subarray has one element.
-    Then it merges the subarrays in sorted order using the merge() function.
-    Comparisons are counted during the merging process.
+    Then it merges the subarrays in sorted order using the merge() function.       
+    Comparisons are counted during the merging process.       
 
-7) merge(int arr[], int l, int m, int r)
-Purpose:
-    Merges two sorted subarrays into a single sorted array.
-Working:
+### 7) merge(int arr[], int l, int m, int r)
+Function:
+```c
+void merge(int arr[], int l, int m, int r){...}
+```
+Purpose:        
+    Merges two sorted subarrays into a single sorted array.      
+    
+Working:        
     It compares elements from both halves and places the smaller element into a temporary array.
-    After merging, the sorted elements are copied back into the original array.
+    After merging, the sorted elements are copied back into the original array.     
 
 ## (c) Overview of the main() Function
+      
+The main() function performs the following steps:    
+1. At first, it asks the user to enter the number of elements (N) and then generates N random integers in the range [1, 1000].       
+3. It displays the original unsorted array.       
+4. It asks the user to choose a sorting algorithm.           
+5. It then calls the corresponding sorting function and displays the sorted array.       
+7. Finally, it prints the total number of comparisons and swaps performed.        
 
-The main() function performs the following steps:
-1. At first, it asks the user to enter the number of elements (N) and then generates N random integers in the range [1, 1000].
-3. It displays the original unsorted array.
-4. It asks the user to choose a sorting algorithm.
-5. It then calls the corresponding sorting function and displays the sorted array.
-7. Finally, it prints the total number of comparisons and swaps performed.
-
-## (d) Sample Output of Complete Run
+## (d) Sample Output of Complete Run     
 Input:
+```c
     Enter number of elements: 5
     Choose sorting method: 1 (Bubble Sort)
+```
 Output:
+```c
     Original Array:
     523 12 876 45 300
 
@@ -108,6 +215,7 @@ Output:
 
     Total Comparisons: 10  
     Total Swaps: 5  
+```
 
 ## (e) Conclusion
 This program demonstrates the implementation of multiple sorting algorithms and allows comparison of their performance based on the number of comparisons and swaps.
